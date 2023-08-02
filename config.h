@@ -39,6 +39,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // Enable key repeat
 #define QUICK_TAP_TERM 100
 
+// Shorten leader timeout
+#define LEADER_TIMEOUT 200
+
 // Underglow configuration
 #ifdef RGBLIGHT_ENABLE
 #    define RGBLIGHT_EFFECT_BREATHING
