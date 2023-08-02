@@ -1,122 +1,197 @@
-A usable default keymap for the Ferris keyboard
-===============================================
+# Hannah's Ferris Sweep Layout
 
-Keymaps in general are quite personal, so it is difficult to come up with a default that will suit every user.
+This is my first attempt at a layout for my new Ferris Sweep. I have chosen
+learn Colemak DH - my first alternative keyboard layout - so I have tried to
+take my cues for numbers and symbols from the UK ISO keyboard layout to keep
+everything else as familiar as possible.
 
-This keymap makes heavy use of keys behaving differently when tapped and held, so that all the keys one may need remain accessible despite the low number of thumb keys.
+Broadly speaking, this is designed as a layout where keys and modifiers are
+tapped rather than held down. Aside from the use of home row modifier keys there
+is no chording required and I try to use tap dancing as an alternative for
+common situations where chording would otherwise be called for.
 
-It comes with a number of layers to give access to most of the keys one may need on a keyboard. It is not meant to be the best possible keymap, but rather a good base on which to build a keymap that works for you.
+In practice, a single tap of the layer key gets to the symbol layer and a double
+tap of the same layer key gets to the number and navigation layer. Most of the
+time you will be tapping this layer key, hitting a symbol then carrying on in
+the base layer. Also, wherever you are, tapping the space or enter key will
+bring you back to the base layer. The idea is that you should not have to think
+too much about which layer you are in most of the time.
 
-This is not the only way to make 34 keys a comfortable typing experience, but it is one way to do so. If you don't already know of a better way, this may be as good a starting point as any :)
+### Credit
 
-Note that this keymap was built from the perspective that it is OK to take a steep learning curve if it results in a keymap that is easier to use in the long run. This means that it may take more effort to learn this keymap than some alternatives. "Easy to use" was assessed against the workflow of the author, so your mileage may vary on some of the details.
+I want to give full credit and a massive amount of thanks to [Ben
+Vallack](https://www.youtube.com/benvallack) for talking through his
+tap-not-hold approach and for all of his inspirational work on ergonomic
+keyboards and layouts. My initial layout drew heavily from his [Ferris Sweep
+layout](https://github.com/benvallack/34-QMK-Ferris-Sweep).
 
-What do all these layers do?
-----------------------------
+The contributers who make QMK possible are an incredible bunch of people and the
+ErgoMechKeyboard community as a whole has been welcoming and helpful. Please
+support open source projects and communities, folks.
 
-### Layer 0: Base layer
+## Base Layer
 
-![Layer 0](https://i.imgur.com/HjNHUPL.png)
+![Base Layer](https://i.imgur.com/rQCSlum.png)
 
-On tapping the keys, our base layer is qwerty with space on the right homing thumb and backspace on the left homing thumb.
+The base layer uses [Colemak DH](https://colemakmods.github.io/mod-dh/)
+[2020](https://forum.colemak.com/topic/2638-announcement-a-change-to-colemakdh/),
+with a `Shift` thumb key on the outside left , a `Space` thumb key on the inside
+left, an `Enter` thumb key on the inside right and a `Sym Layer` thumb key on
+the outside right. The `Backspace` key is available at the top right.
 
-In this layer, the non-homing-thumb positions have 0 and 1. I recommend modifying this to some frequently accessed shortcut such as copy/paste, previous/next tab or anything that makes most sense in your own workflow. O and 1 are place-holders and make it easy to troubleshoot that all keys are working properly before soldering in the switches.
-The reason I recommend convenience shortcuts instead of more commonly used keys like tab or meta is that unhoming of the thumbs was a frequent source of typos for me when I used more than one thumb key frequently in the context of typing.
+When tapped, the `Shift` thumb key capitalises or shifts the next key that is
+tapped. It does nothing when held down. The `Sym Layer` thumb key switches the
+keyboard into the **symbol layer** for one key press only, and the keyboard will
+return to the **base layer** immediately after a symbol key has been tapped.
 
-Despite being missing on this layer, "meta", "tab", "esc" and such are accessible from any other layer: see Layer 7.
+Tap dance is enabled and double taps on the following keys produce different key
+presses:
 
-The behaviour of some keys differ when held:
-* Both homing pinkies behave as shift.
-* Both bottom-row ring fingers behave as ctrl.
-* Both bottom-row middle fingers behave as alt.
+* Double tapping the `Z` key produces `Caps Lock`
+* Double tapping the `X` key produces `Ctrl-X` (i.e. cut)
+* Double tapping the `C` key produces `Ctrl-V` (i.e. copy)
+* Double tapping the `V` key produces `Ctrl-C` (i.e. paste)
+* Double tapping the `F` key produces `Ctrl-F` (i.e. page down in Vim)
+* Double tapping the `B` key produces `Ctrl-B` (i.e. page up in Vim)
 
-* The homing left ring finger gives access to the Function keys layer
-* The homing right ring finger gives access to the Numbers layer
-* The homing left middle finger gives access to the Mouse layer
-* The homing right middle finger gives access to the Navigation layer
-* The homing left index finger gives access to the Right symbols layer
-* The homing right index finger gives access to the Left symbols layer
-* The homing right thumb gives access to the Always accessible layer
+Home row modifiers are available on the following keys:
 
-### Layer 1: Mouse
+* Hold `R` or `I` for `Win`
+* Hold `S` or `E` for `Alt`
+* Hold `T` or `N` for `Ctrl`
 
-![Layer 1](https://i.imgur.com/0fvTuB9.png)
+These keys can be held down alone or in combination. For example, on Windows you
+might hold down the `E` key - for `Alt` - then tap `F` followed by `S` to access
+the File menu followed by the Save menu entry. Or, if you use 1Password, you
+might hold down `N` - for `Ctrl`- then tap `Shift` followed by `Space` to pull
+up the 1Password quick access window.
 
-Layer 1 is a mouse layer: it can be used one-handed or two-handed. The most common way to use it is two handed, with left and right click on the homerow of the left hand and directions on the homerow of the right hand.
-Scrolling is available on the right hand with mid finger up and down for vertical scroll and index and ring finger down for horizontal scroll.
-On the right hand, left click and right click are also available with index and ring finger up to allow one handed operation. This can be particularly handy when enabling the mouse layer permanently (no need to hold the left middle finger), which can be done from Layer 7.
+The `Space` key can be held to produce the `Hyper` modifier, which is actually
+the combination of the `Shift`, `Ctrl`, `Alt` and `Win` keys pressed
+together. This can be used to bind global shortcuts using programs like
+AutoHotKey.
 
-Note that thanks to the transparency, shift, ctrl and alt are all accessible on the left hand while operating the mouse.
+## Symbol Layer
 
-### Layer 2: Navigation
+![Symbol Layer](https://i.imgur.com/zaIR99n.png)
 
-![Layer 2](https://i.imgur.com/ZquQJRq.png)
+The **symbol layer** is influenced by the way symbols are laid out on UK ISO
+keyboards. The symbols usually found above `2` to `8` are on the top row. The
+`Minus` / `Underscore` and `Equals` / `Plus` keys are on the right side as pairs
+of separate keys. The `Esc` and `Tab` keys are on the far left side.
 
-The navigation layer somewhat mirrors the mouse layer. It is accessed by holding the right middle finger and gives access to arrow keys on the left homerow. Page up and down, Home and End mirror the vertical scrolling and horizontal scrolling on the mouse layer.
+In the middle there are more pairs of keys that are usually found to the right
+of the middle row: `Hash` / `Tilde` , `Quote` / `At`  and `Semicolon` / `Colon`.
+The `Exclamation Mark` key is on the bottom right, which would have appeared in
+the `1` position if there was space, but which is now placed on the same key as
+the `Slash/Question mark` key in the base layer as a compromise. The `Grave` key
+appears beside it, also in a compromise position.
 
-On the right hand, in addition to ctrl and alt which are available through transparency, ctrl + alt, ctrl + alt + shift and meta are accessible on the homerow to enable common shortcuts in some window managers. This part is quite workflow dependent, so make sure to adapt it to your own workflow as appropriate.
+Most of the left side is taken up by pairs of braces and brackets. The
+`Backslash` / `Pipe` key pair is on the outside of the left side and the `Func
+Layer` key at the bottom left switches the keyboard into the **function layer**.
 
-### Layer 3: Right symbols
+The `Nav Layer` thumb key on the outside right switches the keyboard into the
+**number and navigation layer**. The `Space` and `Enter` thumb keys remain on
+the inside left and right, and the outside left thumb key becomes `Base Layer`,
+which returns the keyboard to the **base layer**.
 
-![Layer 3](https://i.imgur.com/9tLAUqG.png)
+As well as producing their respective key presses, the `Space` and `Enter` thumb
+keys will also return the keyboard to the **base layer** when tapped.
 
-When holding down the left index, one may access about half of the symbols. The pinkies store `^` and `$` symbols that represent begin and end in vim. The left homerow hosts `*` and `&`, symbols which are related in the way that they represent some form of indirection in programming languages such as rust. On the right hand, most symbols used when navigating the command line are stored together, organized by columns of related symbols. 
+## Number and Navigation Layer
 
-### Layer 4: Left symbols
+![Number and Navigation Layer](https://i.imgur.com/zfo0K7G.png)
 
-![Layer 4](https://i.imgur.com/CkjUSW6.png)
+The top row is taken up by numbers as they appear on standard-sized keyboards.
+On the right side there are arrow keys arranged in the traditional Vim
+navigation format (like `HJKL` in QWERTY keyboards) with the `Home`, `Page
+Down`, `Page Up` and `End` keys below them. The `Delete` and `Insert` keys are
+on the inside right.
 
-When holding down the right index, one may access the other symbols. On the left hand, most of the different brackets are laid out. The most frequent ones (round brackets and curly brackets) get a spot on the homerow. The rest of the layer hosts the remaining symbols that are easier to access here than on any other layers.
+There are a set of modified `Tab` keys on the left hand side for navigating
+between tabs and windows: `Ctrl-Tab`, `Alt-Tab` and `Win-Tab`. In addition,
+for Windows 11, there are two macros bound to keys that will switch to previous
+and next virtual desks. The `Left Button` and `Right Button` keys serve as
+alternative mouse buttons when using an external trackball or trackpad.
 
-### Layer 5: Function keys
+On the bottom left the `Func Layer` key switches the keyboard into the
+**function layer**.
 
-![Layer 5](https://i.imgur.com/fWgVqc4.png)
+Finally, the `Capital-V` key is a Vim shortcut for entering visual mode while
+navigating.
 
-By holding down the left ring finger, one may access the function keys, roughly in a numpad layout.
-This means that alt+F4 is easy to type, with F4 being on the homerow.
-There is a shortcut for ctrl+alt on the left hand to enable convenient switching between virtual terminals on Linux.
+The thumb keys remain consistent: the `Space` and `Enter` thumb keys are on the
+inside and the `Base Layer` thumb key is on the outside left. As with the symbol
+layer, all three of these keys return the keyboard to the **base layer**.
 
-### Layer 6: Numbers
+## Function Layer
 
-![Layer 6](https://i.imgur.com/S8gq9Kj.png)
+![Function Layer](https://i.imgur.com/MhngS8s.png)
 
-The number layer is accessed by holding the right ring finger. It hosts the numbers and some duplicated symbols that are commonly accessed next to numbers, such as mathematical operators.
-The number are layed out similarly to a numpad, but with the middle row and the homerow swapped so that the most used numbers: 0, 1, 2 and 3 are all available in homing positions. 
+Twelve function keys take up most of the left side. When any of the function
+keys are tapped the keyboard returns to the **base layer**.
 
-### Layer 7: Always accessible
+Media controls are on the inside of the left side. These keys are sticky so
+music tracks can be skipped, played and paused without the layer changing.
+Volume adjustment, mute and screen brightness adjustment keys are on the inside
+of the right side. These keys are also sticky so they can be tapped repeatedly.
 
-![Layer 7](https://i.imgur.com/twqBeBb.png)
+The rest of the right side has a number of symbols that can be used in
+conjunction with the number layer to perform calculations. When any of these
+symbols are tapped the keyboard will return to the **number and navigation
+layer**. This is intended to simplify working with a calculator. The positions
+of the symbols mirror their positions in lower layers.
 
-Layer 7 is accessed by holding the right homing thumb down. Because this position is left transparent from every other layer, this layer is always accessible.
-It gives access to some essential keys that would typically be accessed on a thumb cluster or pinkies, such as meta, enter, tab, esc and delete.
+Again, the thumb keys remain consistent: the `Space` and `Enter` thumb keys are
+on the inside and the `Base Layer` thumb key is on the outside left. All three
+of these keys return the keyboard to the **base layer**.
 
-As the layer hosting esc, we duplicated some symbols here to allow for fast navigation in vim. For instance, esc, :, w, q can be done in a single roll.
+The `Sym Layer` thumb key reappears on the far right to return the keyboard to
+the **symbol layer**. This means that a double tap of the thumb key will return
+the keyboard to the **number and navigation layer**.
 
-Where is the keymap.c?
-----------------------
+## Layer Navigation
 
-The keymap.c file is not published to the repository. It is generated from `keymap.json` by the build system.
+The layer navigation keys are designed so that you can move between layers in a
+predictable way without having to know which layer you are currently in.
 
-This avoids duplicating information and allow users to edit their keymap from the qmk configurator web interface.
+**To get to the base layer** tap the *outside right* followed by the *outside
+left* thumb keys.
 
-How do I edit and update the keymap?
-------------------------------------
+**To get to the number layer** tap the *outside right* thumb key twice.
 
-The `keymap.json` file is generated from the qmk configurator interface and formatted for better readability in the context of the Ferris keyboard.
+**To get to the function layer** tap the *outside right* thumb key followed by
+the *bottom left* key.
 
-To edit it, you may:
-* Edit it directly from a text editor.
-* Edit it from the qmk configurator.
+**To get to the symbol layer** tap the *outside right*, *outside left* then
+*outside right* thumb keys.
 
-If you decide to use the latter workflow, here are the steps to follow:
+This last sequence of taps is mostly unnecessary. Most of the time, you will
+have just pressed `Space` or `Enter`, or you will have typed a letter or a
+symbol, and you will know that you are in the **base layer**, so you will only
+have to tap the *outside right* thumb key once to reach the **symbol layer**.
 
-* From the qmk configurator, hit the "import QMK keymap json file" button (it has a drawing with an up arrow on it).
-* Browse to the location of your keymap (for example, `<your qmk repo>/keyboards/ferris/keymaps/default/keymap.json`)
-* Perform any modification to the keymap in the web UI
-* Export the keymap to your downloads folder, by hitting the "Export QMK keymap json file" button (it has a drawing with a down arrow on it)
-* Override your original keymap with the output of formatting the exported keymap by running a command such as this one from the root of your qmk repo:
-  ```
-  ./keyboards/handwired/ferris/keymaps/json2crab.py --input <Your download directory>/default.json > ./keyboards/handwired/ferris/keymaps/default/keymap.json
-  ```
-  Note that you may first need to make json2crab executable by using `chmod +x` on it.
-  Also note that you may then want to remove the exported keymap from your dowload directory.
+Strictly speaking, the same could be said about the first sequence of taps as
+well, but is useful to remember *outside right*, *outside left* as a panic
+sequence of sorts to get back to the beginning and clear your head.
+
+##  How To Compile and Flash RP2040 Firmware
+
+First compile the firmware as normal:
+
+```shell
+qmk compile -kb ferris/sweep -km hbmorrison
+```
+
+Then convert the `ferris_sweep_hbmorrison.hex` file to a `.uf2` file for the
+rp2040 controller by running:
+
+```shell
+make CONVERT_TO=kb2040 ferris/sweep:hbmorrison:uf2-split-left
+```
+
+Once the conversion has completed, the make command will wait for the keyboard
+bootloader to be mounted. Unplug the USB cable from the Ferris Sweep, hold down
+the top left key and, while holding the key down, plug the USB cable back into
+the **left-hand side controller** on the keyboard.
