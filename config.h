@@ -33,14 +33,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MOUSEKEY_WHEEL_TIME_TO_MAX 100
 
 // Pick good defaults for enabling homerow modifiers
-#define TAPPING_TERM 200
-#define PERMISSIVE_HOLD
+#define TAPPING_TERM 190
+#define TAPPING_TERM_PER_KEY
+// Tapping term for the paste key
+#define TAPPING_TERM_PASTE 160
+// Tapping term for the leader key
+#define TAPPING_TERM_LEADER 320
 
-// Enable key repeat
-#define QUICK_TAP_TERM 100
+// Permissive hold does not work well with leader key
+// #define PERMISSIVE_HOLD
 
-// Shorten leader timeout
-#define LEADER_TIMEOUT 200
+// Enable key repeat - disabled for now
+// #define QUICK_TAP_TERM 100
+
+// Leader key
+// #define LEADER_KEY_STRICT_KEY_PROCESSING
+#define LEADER_TIMEOUT 190
 
 // Underglow configuration
 #ifdef RGBLIGHT_ENABLE
