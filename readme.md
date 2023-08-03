@@ -80,7 +80,7 @@ was space, but is placed towards the bottom right as a compromise.
 Most of the left side is taken up by pairs of braces and brackets. The
 `Backslash` / `Pipe` key pair is on the outside of the left side and the `Func
 Layer` key at the bottom left switches the keyboard into the **function layer**.
-The `Scut Layer` key on the bottom right switches the keyboard into the
+The `Shortcut Layer` key on the bottom right switches the keyboard into the
 **shortcut layer** for a single key press and returns the keyboard to the **base
 layer** after a shortcut key has been pressed.
 
@@ -105,13 +105,13 @@ documents.
 
 There are a set of modified `Tab` keys on the left hand side for navigating
 between tabs and windows: `Ctrl-Tab` and `Alt-Tab`. The `Close Tab` key will
-close the currently active tab. In addition, for Windows 11, there are two
-macros bound to keys that will switch to previous and next virtual desks. The
-`Left Button` and `Right Button` keys serve as alternative mouse buttons when
-using an external trackball or trackpad.
+close the currently active tab. In addition, for Windows 11, there are two keys
+that switch to previous and next virtual desks. The `Left Button` and `Right
+Button` keys serve as alternative mouse buttons when using an external trackball
+or trackpad.
 
 On the bottom left the `Func Layer` key switches the keyboard into the
-**function layer**. The `Scut Layer` key on the bottom right switches the
+**function layer**. The `Shortcut Layer` key on the bottom right switches the
 keyboard into the **shortcut layer** for a single key press and returns the
 keyboard to the **base layer** after a shortcut key has been pressed.
 

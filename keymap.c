@@ -9,9 +9,7 @@ enum my_layers {
 };
 
 enum my_keycodes {
-    M_DSKN = SAFE_RANGE,
-    M_DSKP,
-    M_ESCQ,
+    M_ESCQ = SAFE_RANGE,
     M_ESCW,
     M_ESCV,
     M_EQLR,
@@ -35,16 +33,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     TO(FUNC_LAYER), KC_NUBS, KC_RBRC, KC_RCBR, KC_RPRN, KC_SCLN, KC_QUOT, KC_BSLS, KC_GRV, OSL(SCUT_LAYER),
     TO(BASE_LAYER), KC_SPC, KC_ENT, TO(NAV_LAYER)
   ),
-  [SCUT_LAYER] = LAYOUT_split_3x5_2(
-    M_ESCQ, M_ESCW, LCTL(KC_F), LSFT(LCTL(KC_SPC)), LCTL(KC_B), KC_NO, KC_NO, KC_NO, KC_NO, KC_DEL,
-    KC_TAB, HYPR(KC_1), HYPR(KC_2), HYPR(KC_3), HYPR(KC_G), HYPR(KC_M), HYPR(KC_4), HYPR(KC_5), HYPR(KC_6), KC_INS,
-    KC_CAPS, LCTL(KC_X), LCTL(KC_C), LSFT(LCTL(KC_C)), LCTL(KC_V), HYPR(KC_K), LSFT(LCTL(KC_1)), KC_NO, M_EQLR, KC_SLSH,
-    TO(BASE_LAYER), KC_SPC, KC_ENT, KC_NO
-  ),
   [NAV_LAYER] = LAYOUT_split_3x5_2(
     KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0,
     KC_TAB, LCTL(KC_TAB), M_ALTT, KC_BTN1, KC_BTN2, KC_WH_U, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT,
-    TO(FUNC_LAYER), LCTL(KC_F4), M_DSKP, M_DSKN, M_ESCV, KC_WH_D, KC_NO, KC_PGDN, KC_PGUP, OSL(SCUT_LAYER),
+    TO(FUNC_LAYER), LCTL(KC_F4), LCTL(LGUI(KC_LEFT)), LCTL(LGUI(KC_RGHT)), M_ESCV, KC_WH_D, KC_HOME, KC_PGDN, KC_PGUP, OSL(SCUT_LAYER),
     TO(BASE_LAYER), KC_SPC, KC_ENT, KC_NO
   ),
   [FUNC_LAYER] = LAYOUT_split_3x5_2(
@@ -52,6 +44,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_F5, KC_F6, KC_F7, KC_F8, KC_MPLY, KC_VOLD, KC_BRID, KC_NO, KC_MINS, KC_EQL,
     KC_F9, KC_F10, KC_F11, KC_F12, KC_MPRV, KC_MUTE, KC_NO, KC_COMM, KC_DOT, OSL(SCUT_LAYER),
     TO(BASE_LAYER), KC_SPC, KC_ENT, TO(SYM_LAYER)
+  ),
+  [SCUT_LAYER] = LAYOUT_split_3x5_2(
+    M_ESCQ, M_ESCW, LCTL(KC_F), LSFT(LCTL(KC_SPC)), LCTL(KC_B), KC_NO, KC_NO, KC_NO, KC_NO, KC_DEL,
+    KC_TAB, HYPR(KC_1), HYPR(KC_2), HYPR(KC_3), HYPR(KC_G), HYPR(KC_M), HYPR(KC_4), HYPR(KC_5), HYPR(KC_6), KC_INS,
+    KC_CAPS, LCTL(KC_X), LCTL(KC_C), LSFT(LCTL(KC_C)), LCTL(KC_V), HYPR(KC_K), LSFT(LCTL(KC_1)), KC_NO, M_EQLR, KC_SLSH,
+    TO(BASE_LAYER), KC_SPC, KC_ENT, KC_NO
   )
 };
 
@@ -95,22 +93,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         SEND_STRING(SS_TAP(X_ESC));
         SEND_STRING(SS_DOWN(X_LSFT)SS_TAP(X_V)SS_UP(X_LSFT));
-      }
-      break;
-    // Respond to next desktop macro.
-    case M_DSKN:
-      if (record->event.pressed) {
-        SEND_STRING(SS_DOWN(X_LCTL)SS_DOWN(X_LGUI));
-        SEND_STRING(SS_TAP(X_RIGHT));
-        SEND_STRING(SS_UP(X_LGUI)SS_UP(X_LCTL));
-      }
-      break;
-    // Respond to previous desktop macro.
-    case M_DSKP:
-      if (record->event.pressed) {
-        SEND_STRING(SS_DOWN(X_LCTL)SS_DOWN(X_LGUI));
-        SEND_STRING(SS_TAP(X_LEFT));
-        SEND_STRING(SS_UP(X_LGUI)SS_UP(X_LCTL));
       }
       break;
   }
