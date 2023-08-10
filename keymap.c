@@ -23,7 +23,7 @@ static bool m_altt_pressed = false;
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE_LAYER] = LAYOUT_split_3x5_2(
-    LSFT_T(KC_Q), LCTL_T(KC_W), LALT_T(KC_F), LGUI_T(KC_P), KC_B, KC_J, RGUI_T(KC_L), RALT_T(KC_U), RCTL_T(KC_Y), RSFT_T(KC_BSPC),
+    LSFT_T(KC_Q), LCTL_T(KC_W), LALT_T(KC_F), LGUI_T(KC_P), KC_B, KC_J, LGUI_T(KC_L), LALT_T(KC_U), LCTL_T(KC_Y), LSFT_T(KC_BSPC),
     KC_A, KC_R, KC_S, KC_T, KC_G, KC_M, KC_N, KC_E, KC_I, KC_O,
     KC_Z, KC_X, KC_C, KC_D, KC_V, KC_K, KC_H, KC_COMM, KC_DOT, OSL(SCUT_LAYER),
     OSM(MOD_LSFT), KC_SPC, KC_ENT, OSL(SYM_LAYER)
@@ -138,14 +138,22 @@ void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     // Set the tapping term for the homerow mods.
-    case LSFT_T(KC_A):
-    case LCTL_T(KC_R):
-    case LALT_T(KC_S):
-    case LGUI_T(KC_T):
-    case RGUI_T(KC_N):
-    case RALT_T(KC_E):
-    case RCTL_T(KC_I):
-    case RSFT_T(KC_O):
+    case LSFT_T(KC_Q):
+    case LCTL_T(KC_W):
+    case LALT_T(KC_F):
+    case LGUI_T(KC_P):
+    case LGUI_T(KC_L):
+    case LALT_T(KC_U):
+    case LCTL_T(KC_Y):
+    case LSFT_T(KC_BSPC):
+    case LSFT_T(KC_1):
+    case LCTL_T(KC_2):
+    case LALT_T(KC_3):
+    case LGUI_T(KC_4):
+    case LGUI_T(KC_7):
+    case LALT_T(KC_8):
+    case LCTL_T(KC_9):
+    case LSFT_T(KC_0):
       return TAPPING_TERM_MODS;
     default:
       return TAPPING_TERM;
