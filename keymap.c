@@ -23,8 +23,8 @@ static bool m_altt_pressed = false;
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE_LAYER] = LAYOUT_split_3x5_2(
-    KC_Q, KC_W, KC_F, KC_P, KC_B, KC_J, KC_L, KC_U, KC_Y, KC_BSPC,
-    LSFT_T(KC_A), LCTL_T(KC_R), LALT_T(KC_S), LGUI_T(KC_T), KC_G, KC_M, RGUI_T(KC_N), RALT_T(KC_E), RCTL_T(KC_I), RSFT_T(KC_O),
+    LSFT_T(KC_Q), LCTL_T(KC_W), LALT_T(KC_F), LGUI_T(KC_P), KC_B, KC_J, RGUI_T(KC_L), RALT_T(KC_U), RCTL_T(KC_Y), RSFT_T(KC_BSPC),
+    KC_A, KC_R, KC_S, KC_T, KC_G, KC_M, KC_N, KC_E, KC_I, KC_O,
     KC_Z, KC_X, KC_C, KC_D, KC_V, KC_K, KC_H, KC_COMM, KC_DOT, OSL(SCUT_LAYER),
     OSM(MOD_LSFT), KC_SPC, KC_ENT, OSL(SYM_LAYER)
   ),
