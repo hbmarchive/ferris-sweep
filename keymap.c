@@ -12,18 +12,44 @@ enum my_keycodes {
     M_ESCQ = SAFE_RANGE,
     M_ESCW,
     M_ESCV,
-    M_EQLR,
+    M_DDS,
     M_ALTT,
     M_SCM1
 };
 
 enum {
-  TD_SPC_TAB
+  TD_SPC_TAB,
+  TD_HOME_END
 };
+
+typedef enum {
+  TD_NONE,
+  TD_UNKNOWN,
+  TD_SINGLE_TAP,
+  TD_DOUBLE_TAP,
+  TD_OTHER_KEY
+} td_state_t;
+
+typedef struct {
+  bool is_press_action;
+  td_state_t state;
+} td_doubletap_t;
+
+// Create instance of 'td_doubletap_t' for the home/end tap dance.
+static td_doubletap_t home_end = {
+  .is_press_action = true,
+  .state = TD_NONE
+};
+
+// For the leader tap dance, put here so they can be used in any keymap.
+td_state_t td_get_taps(tap_dance_state_t *state);
+void home_end_finished(tap_dance_state_t *state, void *user_data);
+void home_end_reset(tap_dance_state_t *state, void *user_data);
 
 // Tap Dance definitions
 tap_dance_action_t tap_dance_actions[] = {
-    [TD_SPC_TAB] = ACTION_TAP_DANCE_DOUBLE(KC_SPC, KC_TAB)
+    [TD_SPC_TAB] = ACTION_TAP_DANCE_DOUBLE(KC_SPC, KC_TAB),
+    [TD_HOME_END] =ACTION_TAP_DANCE_FN_ADVANCED(NULL, home_end_finished, home_end_reset)
 };
 
 // Stores state of M_ALTT macro - true if we are currently tabbing between
@@ -46,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [NAV_LAYER] = LAYOUT_split_3x5_2(
     LSFT_T(KC_1), LCTL_T(KC_2), LALT_T(KC_3), LGUI_T(KC_4), KC_5, KC_6, LGUI_T(KC_7), LALT_T(KC_8), LCTL_T(KC_9), LSFT_T(KC_0),
     KC_TAB, LCTL(KC_TAB), M_ALTT, KC_BTN1, KC_BTN2, KC_WH_U, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT,
-    TO(FUNC_LAYER), LCTL(LGUI(KC_LEFT)), LCTL(LGUI(KC_RGHT)), M_SCM1, M_ESCV, KC_WH_D, KC_HOME, KC_PGDN, KC_PGUP, OSL(SCUT_LAYER),
+    TO(FUNC_LAYER), LCTL(LGUI(KC_LEFT)), LCTL(LGUI(KC_RGHT)), M_SCM1, M_ESCV, KC_WH_D, TD(TD_HOME_END), KC_PGDN, KC_PGUP, OSL(SCUT_LAYER),
     KC_TRNS, TO(BASE_LAYER), KC_NO, KC_TRNS
   ),
   [FUNC_LAYER] = LAYOUT_split_3x5_2(
@@ -57,16 +83,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [SCUT_LAYER] = LAYOUT_split_3x5_2(
     M_ESCQ, M_ESCW, LCTL(KC_F), LSFT(LCTL(KC_SPC)), LCTL(KC_B), KC_NO, KC_NO, KC_NO, KC_NO, KC_DEL,
-    KC_TAB, HYPR(KC_1), HYPR(KC_2), HYPR(KC_3), HYPR(KC_G), HYPR(KC_M), HYPR(KC_4), HYPR(KC_5), HYPR(KC_6), KC_INS,
-    KC_CAPS, LCTL(KC_X), LCTL(KC_C), LSFT(LCTL(KC_C)), LCTL(KC_V), HYPR(KC_K), LSFT(LCTL(KC_1)), KC_NO, M_EQLR, KC_SLSH,
+    KC_ESC, HYPR(KC_1), HYPR(KC_2), HYPR(KC_3), HYPR(KC_G), HYPR(KC_M), HYPR(KC_4), HYPR(KC_5), HYPR(KC_6), KC_INS,
+    KC_CAPS, LCTL(KC_X), LCTL(KC_C), LSFT(LCTL(KC_C)), LCTL(KC_V), HYPR(KC_K), LSFT(LCTL(KC_1)), KC_NO, M_DDS, KC_SLSH,
     KC_TRNS, TO(BASE_LAYER), KC_NO, KC_TRNS
   )
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  // Stop pressing the alt key once a key other than the alt-tab macro has been
+  // pressed.
   if (keycode != M_ALTT && m_altt_pressed) {
     unregister_code(KC_LALT);
     m_altt_pressed = false;
+  }
+  // Ensure shift is not pressed when the symbol layer is active.
+  if (IS_LAYER_ON(SYM_LAYER)) {
+    del_mods(MOD_MASK_SHIFT);
+    del_oneshot_mods(MOD_MASK_SHIFT);
   }
   switch (keycode) {
     case M_ALTT:
@@ -99,9 +132,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_move(BASE_LAYER);
       }
       break;
-    case M_EQLR:
+    case M_DDS:
       if (record->event.pressed) {
-        SEND_STRING("=> ");
+        SEND_STRING("../");
       } else {
         layer_move(BASE_LAYER);
       }
@@ -118,8 +151,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    // Return to the base layer if space, enter or a function key is pressed.
-    case KC_SPC:
+    // Return to the base layer if space, enter, home/end or a function key is
+    // pressed.
+    case TD(TD_SPC_TAB):
     case KC_ENT:
     case KC_F1 ... KC_F12:
       if (!record->event.pressed) { layer_move(BASE_LAYER); }
@@ -127,6 +161,7 @@ void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
     // Cancel caps lock if escape is pressed.
     case KC_ESC:
       if (host_keyboard_led_state().caps_lock) { tap_code(KC_CAPS); }
+      if (!record->event.pressed) { layer_move(BASE_LAYER); }
       break;
     // Return to the nav layer if symbols in the func layer have been pressed.
     case KC_ASTR:
@@ -142,6 +177,43 @@ void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       break;
   }
+}
+
+td_state_t td_get_taps(tap_dance_state_t *state) {
+  if (state->count == 1) {
+    // Interrupted means another key has been pressed within the tapping term
+    // and state not being pressed means the key is no longer pressed, so return
+    // a single tap.
+    if (state->interrupted || !state->pressed) return TD_SINGLE_TAP;
+  } else if (state->count == 2) {
+    // If the double tap has been interrupted we interpret that as fast typing.
+    if (state->interrupted) return TD_OTHER_KEY;
+    // And if the tapping term has expired without another key being pressed to
+    // interrupt, we interpret this as double tap.
+    else if (!state->pressed) return TD_DOUBLE_TAP;
+  }
+  return TD_UNKNOWN;
+}
+
+void home_end_finished(tap_dance_state_t *state, void *user_data) {
+  home_end.state = td_get_taps(state);
+  switch (home_end.state) {
+    case TD_SINGLE_TAP:
+    case TD_OTHER_KEY:
+      tap_code(KC_HOME);
+      layer_move(BASE_LAYER);
+      break;
+    case TD_DOUBLE_TAP:
+      tap_code(KC_END);
+      layer_move(BASE_LAYER);
+      break;
+    default:
+      break;
+  }
+}
+
+void home_end_reset(tap_dance_state_t *state, void *user_data) {
+  home_end.state = TD_NONE;
 }
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
@@ -164,6 +236,9 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     case LCTL_T(KC_9):
     case LSFT_T(KC_0):
       return TAPPING_TERM_MODS;
+    case TD(TD_SPC_TAB):
+    case TD(TD_HOME_END):
+      return TAPPING_TERM_TAPDANCE;
     default:
       return TAPPING_TERM;
   }

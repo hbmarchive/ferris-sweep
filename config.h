@@ -57,5 +57,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // Tapping term for the homerow mod keys
 #define TAPPING_TERM_MODS 550
 
+// Tapping term for tapdance keys
+#define TAPPING_TERM_TAPDANCE 160
+
 // Enable key repeat - disabled for now
 // #define QUICK_TAP_TERM 100
