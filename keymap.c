@@ -82,10 +82,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS, TO(BASE_LAYER), TO(SYM_LAYER), KC_TRNS
   ),
   [SCUT_LAYER] = LAYOUT_split_3x5_2(
-    M_ESCQ, M_ESCW, LCTL(KC_F), LSFT(LCTL(KC_SPC)), LCTL(KC_B), KC_NO, KC_NO, KC_NO, KC_NO, KC_DEL,
-    KC_ESC, HYPR(KC_1), HYPR(KC_2), HYPR(KC_3), HYPR(KC_G), HYPR(KC_M), HYPR(KC_4), HYPR(KC_5), HYPR(KC_6), KC_INS,
-    KC_CAPS, LCTL(KC_X), LCTL(KC_C), LSFT(LCTL(KC_C)), LCTL(KC_V), HYPR(KC_K), LSFT(LCTL(KC_1)), KC_NO, M_DDS, KC_SLSH,
-    KC_TRNS, TO(BASE_LAYER), KC_NO, KC_TRNS
+    M_ESCQ,   M_ESCW,          LCTL(KC_F),  KC_NO,               LCTL(KC_B),  HYPR(KC_J),  KC_NO,             KC_NO,       KC_NO,    KC_DEL,
+    KC_ESC,   HYPR(KC_1),      HYPR(KC_2),  LSFT(LCTL(KC_SPC)),  HYPR(KC_3),  HYPR(KC_M),  HYPR(KC_4),        HYPR(KC_5),  HYPR(KC_6),  KC_INS,
+    KC_CAPS,  LCTL(KC_X),      LCTL(KC_C),  LSFT(LCTL(KC_C)),    LCTL(KC_V),  HYPR(KC_K),  LSFT(LCTL(KC_1)),  KC_NO,       M_DDS,       KC_SLSH,
+    KC_TRNS,  TO(BASE_LAYER),  KC_NO,       KC_TRNS
   )
 };
 
