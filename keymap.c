@@ -76,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     TO(BASE_LAYER), KC_TRNS, KC_TRNS, KC_NO
   ),
   [FUNC_LAYER] = LAYOUT_split_3x5_2(
-    KC_F1, KC_F2, KC_F3, KC_F4, KC_MNXT, KC_VOLU, KC_BRIU, KC_ASTR, KC_NO, KC_PLUS,
+    KC_F1, KC_F2, KC_F3, KC_F4, KC_MNXT, KC_VOLU, KC_BRIU, KC_ASTR, KC_PSCR, KC_PLUS,
     KC_F5, KC_F6, KC_F7, KC_F8, KC_MPLY, KC_VOLD, KC_BRID, KC_NO, KC_MINS, KC_EQL,
     KC_F9, KC_F10, KC_F11, KC_F12, KC_MPRV, KC_MUTE, KC_NO, KC_COMM, KC_DOT, OSL(SCUT_LAYER),
     TO(BASE_LAYER), KC_TRNS, KC_TRNS, TO(SYM_LAYER)
@@ -155,6 +155,7 @@ void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
     // pressed.
     case TD(TD_SPC_TAB):
     case KC_ENT:
+    case KC_PSCR:
     case KC_F1 ... KC_F12:
       if (!record->event.pressed) { layer_move(BASE_LAYER); }
       break;
