@@ -14,7 +14,8 @@ enum my_keycodes {
     M_ESCV,
     M_DDS,
     M_ALTT,
-    M_SCM1
+    M_SCM1,
+    M_ETCTLZ
 };
 
 enum {
@@ -58,34 +59,34 @@ static bool m_altt_pressed = false;
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE_LAYER] = LAYOUT_split_3x5_2(
-    LSFT_T(KC_Q), LCTL_T(KC_W), LALT_T(KC_F), LGUI_T(KC_P), KC_B, KC_J, LGUI_T(KC_L), LALT_T(KC_U), LCTL_T(KC_Y), LSFT_T(KC_BSPC),
-    KC_A, KC_R, KC_S, KC_T, KC_G, KC_M, KC_N, KC_E, KC_I, KC_O,
-    KC_Z, KC_X, KC_C, KC_D, KC_V, KC_K, KC_H, KC_COMM, KC_DOT, OSL(SCUT_LAYER),
-    OSM(MOD_LSFT), TD(TD_SPC_TAB), KC_ENT, OSL(SYM_LAYER)
+    LSFT_T(KC_Q),   LCTL_T(KC_W),    LALT_T(KC_F),  LGUI_T(KC_P),   KC_B,  KC_J,  LGUI_T(KC_L),  LALT_T(KC_U),  LCTL_T(KC_Y),  LSFT_T(KC_BSPC),
+    KC_A,           KC_R,            KC_S,          KC_T,           KC_G,  KC_M,  KC_N,          KC_E,          KC_I,          KC_O,
+    KC_Z,           KC_X,            KC_C,          KC_D,           KC_V,  KC_K,  KC_H,          KC_COMM,       KC_DOT,        OSL(SCUT_LAYER),
+    OSM(MOD_LSFT),  TD(TD_SPC_TAB),  KC_ENT,        OSL(SYM_LAYER)
   ),
   [SYM_LAYER] = LAYOUT_split_3x5_2(
-    KC_EXLM, LSFT(KC_2), LSFT(KC_3), KC_DLR, KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_UNDS, KC_PLUS,
-    KC_ESC, LSFT(KC_NUBS), KC_LBRC, KC_LCBR, KC_LPRN, KC_COLN, LSFT(KC_QUOT), LSFT(KC_BSLS), KC_MINS, KC_EQL,
-    TO(FUNC_LAYER), KC_NUBS, KC_RBRC, KC_RCBR, KC_RPRN, KC_SCLN, KC_QUOT, KC_BSLS, KC_GRV, OSL(SCUT_LAYER),
-    TO(BASE_LAYER), KC_TRNS, KC_TRNS, TO(NAV_LAYER)
+    KC_EXLM,         LSFT(KC_2),     LSFT(KC_3),  KC_DLR,        KC_PERC,  KC_CIRC,  KC_AMPR,        KC_ASTR,        KC_UNDS,  KC_PLUS,
+    KC_ESC,          LSFT(KC_NUBS),  KC_LBRC,     KC_LCBR,       KC_LPRN,  KC_COLN,  LSFT(KC_QUOT),  LSFT(KC_BSLS),  KC_MINS,  KC_EQL,
+    TO(FUNC_LAYER),  KC_NUBS,        KC_RBRC,     KC_RCBR,       KC_RPRN,  KC_SCLN,  KC_QUOT,        KC_BSLS,        KC_GRV,   OSL(SCUT_LAYER),
+    TO(BASE_LAYER),  KC_TRNS,        KC_TRNS,     TO(NAV_LAYER)
   ),
   [NAV_LAYER] = LAYOUT_split_3x5_2(
-    LSFT_T(KC_1), LCTL_T(KC_2), LALT_T(KC_3), LGUI_T(KC_4), KC_5, KC_6, LGUI_T(KC_7), LALT_T(KC_8), LCTL_T(KC_9), LSFT_T(KC_0),
-    KC_TAB, LCTL(KC_TAB), M_ALTT, KC_BTN1, KC_BTN2, KC_WH_U, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT,
-    TO(FUNC_LAYER), LCTL(LGUI(KC_LEFT)), LCTL(LGUI(KC_RGHT)), M_SCM1, M_ESCV, KC_WH_D, TD(TD_HOME_END), KC_PGDN, KC_PGUP, OSL(SCUT_LAYER),
-    TO(BASE_LAYER), KC_TRNS, KC_TRNS, KC_NO
+    LSFT_T(KC_1),    LCTL_T(KC_2),         LALT_T(KC_3),         LGUI_T(KC_4),  KC_5,     KC_6,     LGUI_T(KC_7),     LALT_T(KC_8),  LCTL_T(KC_9),  LSFT_T(KC_0),
+    KC_ESC,          LCTL(KC_TAB),         M_ALTT,               KC_BTN1,       KC_BTN2,  KC_WH_U,  KC_LEFT,          KC_DOWN,       KC_UP,         KC_RGHT,
+    TO(FUNC_LAYER),  LCTL(LGUI(KC_LEFT)),  LCTL(LGUI(KC_RGHT)),  M_SCM1,        M_ESCV,   KC_WH_D,  TD(TD_HOME_END),  KC_PGDN,       KC_PGUP,       OSL(SCUT_LAYER),
+    TO(BASE_LAYER),  KC_TRNS,              KC_TRNS,              KC_NO
   ),
   [FUNC_LAYER] = LAYOUT_split_3x5_2(
-    KC_F1, KC_F2, KC_F3, KC_F4, KC_MNXT, KC_VOLU, KC_BRIU, KC_ASTR, KC_PSCR, KC_PLUS,
-    KC_F5, KC_F6, KC_F7, KC_F8, KC_MPLY, KC_VOLD, KC_BRID, KC_NO, KC_MINS, KC_EQL,
-    KC_F9, KC_F10, KC_F11, KC_F12, KC_MPRV, KC_MUTE, KC_NO, KC_COMM, KC_DOT, OSL(SCUT_LAYER),
-    TO(BASE_LAYER), KC_TRNS, KC_TRNS, TO(SYM_LAYER)
+    KC_F1,           KC_F2,    KC_F3,    KC_F4,         KC_MNXT,  KC_VOLU,  KC_BRIU,  KC_ASTR,  KC_PSCR,  KC_PLUS,
+    KC_F5,           KC_F6,    KC_F7,    KC_F8,         KC_MPLY,  KC_VOLD,  KC_BRID,  KC_NO,    KC_MINS,  KC_EQL,
+    KC_F9,           KC_F10,   KC_F11,   KC_F12,        KC_MPRV,  KC_MUTE,  KC_NO,    KC_COMM,  KC_DOT,   OSL(SCUT_LAYER),
+    TO(BASE_LAYER),  KC_TRNS,  KC_TRNS,  TO(SYM_LAYER)
   ),
   [SCUT_LAYER] = LAYOUT_split_3x5_2(
-    M_ESCQ,   M_ESCW,          LCTL(KC_F),  KC_NO,               LCTL(KC_B),  HYPR(KC_J),  KC_NO,             KC_NO,       KC_NO,    KC_DEL,
-    KC_ESC,   HYPR(KC_1),      HYPR(KC_2),  LSFT(LCTL(KC_SPC)),  HYPR(KC_3),  HYPR(KC_M),  HYPR(KC_4),        HYPR(KC_5),  HYPR(KC_6),  KC_INS,
-    KC_CAPS,  LCTL(KC_X),      LCTL(KC_C),  LSFT(LCTL(KC_C)),    LCTL(KC_V),  HYPR(KC_K),  LSFT(LCTL(KC_1)),  KC_NO,       M_DDS,       KC_SLSH,
-    TO(BASE_LAYER), KC_TRNS,  KC_TRNS,   KC_NO
+    M_ESCQ,          M_ESCW,      LCTL(KC_F),  KC_NO,               LCTL(KC_B),  HYPR(KC_J),  KC_NO,             KC_NO,          KC_NO,     KC_DEL,
+    HYPR(KC_1),      HYPR(KC_2),  HYPR(KC_3),  LSFT(LCTL(KC_SPC)),  HYPR(KC_4),  HYPR(KC_M),  LSFT(LCTL(KC_1)),  LGUI(KC_SCLN),  M_ETCTLZ,  KC_INS,
+    KC_CAPS,         LCTL(KC_X),  LCTL(KC_C),  LSFT(LCTL(KC_C)),    LCTL(KC_V),  HYPR(KC_K),  KC_NO,             KC_NO,          M_DDS,     KC_SLSH,
+    TO(BASE_LAYER),  KC_TRNS,     KC_TRNS,     KC_NO
   )
 };
 
@@ -143,6 +144,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         SEND_STRING(SS_TAP(X_ESC));
         SEND_STRING(SS_DOWN(X_LSFT)SS_TAP(X_V)SS_UP(X_LSFT));
+      }
+      break;
+    case M_ETCTLZ:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_ENT));
+        SEND_STRING(SS_DOWN(X_LSFT)SS_TAP(X_BSLS)SS_UP(X_LSFT));
+        SEND_STRING(SS_DOWN(X_LCTL)SS_TAP(X_Z)SS_UP(X_LCTL));
       }
       break;
   }
